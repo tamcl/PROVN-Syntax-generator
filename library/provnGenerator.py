@@ -38,10 +38,12 @@ class provnGenerator:
         else:
             meta_string = ''
         self.document += '\n  entity({}:{}{})'.format(var, name, meta_string)
+        self.entities.append((var,name))
         return var, name
 
     def activity(self, var, name, meta={}):
         self.document += '\n  activity({}:{}, -, -)'.format(var, name)
+        self.activities.append((var, name))
         return (var, name)
 
     def agent(self, var, name, meta={}):
@@ -50,6 +52,7 @@ class provnGenerator:
         else:
             meta_string = '-'
         self.document += '\n  agent({}:{}, {})'.format(var, name, meta_string)
+        self.agents.append((var, name))
         return (var, name)
 
     def used(self, from_v, to_v, meta={}):
@@ -83,6 +86,6 @@ class provnGenerator:
 
                 meta_string += k + '=' + '"' + i + '"'
             else:
-                meta_string += k + '=' + i
+                meta_string += k + '=' + str(i)
         meta_string += ']'
         return meta_string
